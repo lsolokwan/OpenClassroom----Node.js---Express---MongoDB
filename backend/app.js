@@ -1,5 +1,5 @@
 const express = require('express');
-
+const bodyParser = require('body-parser');
 const app = express();
 // Ajout middleware générale pour gérer CORS
 app.use((req, res, next) => {
@@ -9,6 +9,15 @@ app.use((req, res, next) => {
     next();
   });
 
+  app.use(bodyParser.json());
+
+  //post 
+  app.post('/api/stuff', (req, res, next) => {
+    console.log(req.body);
+    res.status(201).json({
+      message: 'Objet créé !'
+    });
+  });
 // Middleware partie 1
 // ajout argument /api/stuff = url visée par l'application : endpoint : route
 // Dedans crée deux objets
